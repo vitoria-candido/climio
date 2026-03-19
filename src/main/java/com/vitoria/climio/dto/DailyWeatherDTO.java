@@ -17,6 +17,9 @@ public class DailyWeatherDTO {
     @JsonProperty("temperature_2m_min")
     private List<Double> temperatureMin;
 
+    @JsonProperty("wind_speed_10m_max")
+    private List<Double> windSpeedMax;
+
     public List<String> getTime() {
         return time;
     }
@@ -47,5 +50,13 @@ public class DailyWeatherDTO {
 
     public void setTemperatureMin(List<Double> temperatureMin) {
         this.temperatureMin = temperatureMin;
+    }
+
+    public List<Double> getWindSpeedMax() {
+        return windSpeedMax;
+    }
+
+    public void setWindSpeedMax(List<Double> windSpeedMax) {
+        this.windSpeedMax = windSpeedMax;
     }
 }

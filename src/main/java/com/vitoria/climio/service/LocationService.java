@@ -34,13 +34,11 @@ public class LocationService {
         String originalCity = city.trim().replaceAll("\\s+", " ");
         String normalizedInput = normalizeText(originalCity);
 
-        // 1. tenta com o texto original
         NominatimLocationDTO result = searchBestLocation(originalCity, normalizedInput);
         if (result != null) {
             return result;
         }
 
-        // 2. fallback sem acentos
         String noAccentCity = removeAccents(originalCity);
         if (!noAccentCity.equalsIgnoreCase(originalCity)) {
             result = searchBestLocation(noAccentCity, normalizedInput);
@@ -137,7 +135,8 @@ public class LocationService {
                 url,
                 HttpMethod.GET,
                 entity,
-                new ParameterizedTypeReference<List<NominatimLocationDTO>>() {}
+                new ParameterizedTypeReference<List<NominatimLocationDTO>>() {
+                }
         );
 
         return response.getBody();

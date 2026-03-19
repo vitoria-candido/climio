@@ -1,74 +1,74 @@
 <!DOCTYPE html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Climio</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" th:href="@{/style.css}">
+    <title>Climio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body class="home-page">
 
 <div class="page-shell">
-  <div class="home-background">
-    <span class="home-orb home-orb-1"></span>
-    <span class="home-orb home-orb-2"></span>
-    <span class="home-orb home-orb-3"></span>
-  </div>
+    <div class="home-background">
+        <span class="home-orb home-orb-1"></span>
+        <span class="home-orb home-orb-2"></span>
+        <span class="home-orb home-orb-3"></span>
+    </div>
 
-  <main class="container">
-    <section class="hero hero-home">
-      <span class="hero-badge hero-badge-home">Planejamento Inteligente ao Ar Livre</span>
-      <h1>Climio</h1>
-      <p class="hero-subtitle">
-        Descubra a previsão do tempo ideal para sua atividade com uma interface
-        mais leve, bonita e agradável de usar.
-      </p>
-    </section>
+    <main class="container">
+        <section class="hero hero-home">
+            <span class="hero-badge hero-badge-home">Planejamento Inteligente ao Ar Livre</span>
+            <h1>Climio</h1>
+            <p class="hero-subtitle">
+                Descubra a previsão do tempo ideal para sua atividade com uma interface
+                mais leve, bonita e agradável de usar.
+            </p>
+        </section>
 
-    <section class="card main-card home-card">
-      <div class="section-title center-text">
-        <h2>Planeje Sua Próxima Atividade</h2>
-        <p>
-          Informe a cidade, a data e a atividade desejada para receber
-          uma recomendação personalizada.
-        </p>
-      </div>
+        <section class="card main-card home-card">
+            <div class="section-title center-text">
+                <h2>Planeje Sua Próxima Atividade</h2>
+                <p>
+                    Informe a cidade, a data e a atividade desejada para receber
+                    uma recomendação personalizada.
+                </p>
+            </div>
 
-      <form th:action="@{/recommendation}" method="post" th:object="${searchForm}" class="search-form">
-        <div class="form-grid">
-          <div class="form-group">
-            <label for="city">Cidade</label>
-            <input id="city" type="text" th:field="*{city}" placeholder="Ex.: São Paulo" required>
-          </div>
+            <form th:action="@{/recommendation}" method="post" th:object="${searchForm}" class="search-form">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="city">Cidade</label>
+                        <input id="city" type="text" th:field="*{city}" placeholder="Ex.: São Paulo" required>
+                    </div>
 
-          <div class="form-group">
-            <label for="date">Data</label>
-            <input id="date" type="date" th:field="*{date}" required>
-          </div>
+                    <div class="form-group">
+                        <label for="date">Data</label>
+                        <input id="date" type="date" th:field="*{date}" required>
+                    </div>
 
-          <div class="form-group">
-            <label for="activityType">Atividade</label>
-            <select id="activityType" th:field="*{activityType}" required>
-              <option value="">Selecione</option>
-              <option value="CAMINHADA">Caminhada</option>
-              <option value="CORRIDA">Corrida</option>
-              <option value="TRILHA">Trilha</option>
-              <option value="BIKE">Bike</option>
-              <option value="PRAIA">Praia</option>
-            </select>
-          </div>
-        </div>
+                    <div class="form-group">
+                        <label for="activityType">Atividade</label>
+                        <select id="activityType" th:field="*{activityType}" required>
+                            <option value="">Selecione</option>
+                            <option value="CAMINHADA">Caminhada</option>
+                            <option value="CORRIDA">Corrida</option>
+                            <option value="TRILHA">Trilha</option>
+                            <option value="BIKE">Bike</option>
+                            <option value="PRAIA">Praia</option>
+                        </select>
+                    </div>
+                </div>
 
-        <button type="submit" class="primary-button">Gerar Recomendação</button>
-      </form>
+                <button type="submit" class="primary-button">Gerar Recomendação</button>
+            </form>
 
-      <div class="home-highlights">
-        <div class="highlight-pill">☀️ Visual Leve</div>
-        <div class="highlight-pill">🌦️ Tema por Clima</div>
-        <div class="highlight-pill">📍 Busca Rápida</div>
-      </div>
-    </section>
-  </main>
+            <div class="home-highlights">
+                <div class="highlight-pill">☀️ Visual Leve</div>
+                <div class="highlight-pill">🌦️ Tema por Clima</div>
+                <div class="highlight-pill">📍 Busca Rápida</div>
+            </div>
+        </section>
+    </main>
 </div>
 
 </body>

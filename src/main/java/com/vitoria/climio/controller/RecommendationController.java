@@ -26,12 +26,14 @@ public class RecommendationController {
     private final TextFormatterService textFormatterService;
     private final WeatherThemeService weatherThemeService;
 
-    public RecommendationController(LocationService locationService,
-                                    WeatherService weatherService,
-                                    RecommendationService recommendationService,
-                                    WeatherDescriptionService weatherDescriptionService,
-                                    TextFormatterService textFormatterService,
-                                    WeatherThemeService weatherThemeService) {
+    public RecommendationController(
+            LocationService locationService,
+            WeatherService weatherService,
+            RecommendationService recommendationService,
+            WeatherDescriptionService weatherDescriptionService,
+            TextFormatterService textFormatterService,
+            WeatherThemeService weatherThemeService
+    ) {
         this.locationService = locationService;
         this.weatherService = weatherService;
         this.recommendationService = recommendationService;
@@ -42,7 +44,6 @@ public class RecommendationController {
 
     @PostMapping("/recommendation")
     public String recommendation(@ModelAttribute SearchFormDTO searchForm, Model model) {
-
         String formattedCity = textFormatterService.formatCityName(searchForm.getCity());
         String formattedActivity = textFormatterService.formatActivity(searchForm.getActivityType());
         String formattedDate = searchForm.getDate()
@@ -57,7 +58,7 @@ public class RecommendationController {
         if (location == null) {
             model.addAttribute("locationError", "Cidade não encontrada. Tente pesquisar com outro nome.");
             model.addAttribute("weatherClass", "weather-default");
-            model.addAttribute("themeLabel", "Clima Indisponível");
+            model.addAttribute("themeLabel", "Clima indisponível");
             model.addAttribute("videoFileName", "default.mp4");
             return "result";
         }
@@ -79,7 +80,7 @@ public class RecommendationController {
         if (weather == null || weather.getDaily() == null || weather.getDaily().getTime() == null) {
             model.addAttribute("weatherError", "Não foi possível obter a previsão do clima.");
             model.addAttribute("weatherClass", "weather-default");
-            model.addAttribute("themeLabel", "Clima Indisponível");
+            model.addAttribute("themeLabel", "Clima indisponível");
             model.addAttribute("videoFileName", "default.mp4");
             return "result";
         }
@@ -90,7 +91,7 @@ public class RecommendationController {
         if (index == -1) {
             model.addAttribute("weatherError", "Data fora do intervalo de previsão.");
             model.addAttribute("weatherClass", "weather-default");
-            model.addAttribute("themeLabel", "Clima Indisponível");
+            model.addAttribute("themeLabel", "Clima indisponível");
             model.addAttribute("videoFileName", "default.mp4");
             return "result";
         }
@@ -98,18 +99,19 @@ public class RecommendationController {
         double temperatureMax = weather.getDaily().getTemperatureMax().get(index);
         double temperatureMin = weather.getDaily().getTemperatureMin().get(index);
         int weatherCode = weather.getDaily().getWeatherCode().get(index);
-
+        double windSpeed = weather.getDaily().getWindSpeedMax().get(index);
         double averageTemperature = (temperatureMax + temperatureMin) / 2.0;
 
         String recommendation = recommendationService.generateRecommendation(
                 searchForm.getActivityType(),
                 averageTemperature,
                 weatherCode,
-                0
+                windSpeed
         );
 
         String weatherDescription = weatherDescriptionService.getDescription(weatherCode);
         String weatherEmoji = weatherDescriptionService.getEmoji(weatherCode);
+
         String extraTip = recommendationService.generateExtraTip(
                 searchForm.getActivityType(),
                 averageTemperature,
@@ -122,6 +124,7 @@ public class RecommendationController {
 
         model.addAttribute("temperatureMax", String.format("%.1f", temperatureMax));
         model.addAttribute("temperatureMin", String.format("%.1f", temperatureMin));
+        model.addAttribute("windSpeed", String.format("%.1f", windSpeed));
         model.addAttribute("weatherDescription", weatherDescription);
         model.addAttribute("weatherEmoji", weatherEmoji);
         model.addAttribute("recommendation", recommendation);

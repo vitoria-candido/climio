@@ -15,7 +15,7 @@ public class WeatherService {
 
     public WeatherResponseDTO getWeatherForecast(double latitude, double longitude) {
         String url = String.format(
-                "https://api.open-meteo.com/v1/forecast?latitude=%s&longitude=%s&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto&forecast_days=16",
+                "https://api.open-meteo.com/v1/forecast?latitude=%s&longitude=%s&daily=weather_code,temperature_2m_max,temperature_2m_min,wind_speed_10m_max&timezone=auto&forecast_days=16",
                 latitude,
                 longitude
         );

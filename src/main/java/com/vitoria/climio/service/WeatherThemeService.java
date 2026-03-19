@@ -35,13 +35,13 @@ public class WeatherThemeService {
 
     public String getThemeLabel(int weatherCode) {
         return switch (getWeatherClass(weatherCode)) {
-            case "weather-sunny" -> "Clima Ensolarado ☀️";
-            case "weather-cloudy" -> "Clima Nublado 🌥️";
-            case "weather-fog" -> "Clima com Neblina 🌫";
-            case "weather-rain" -> "Clima Chuvoso ☔️";
-            case "weather-storm" -> "Clima de Tempestade ⛈️";
-            case "weather-cold" -> "Clima Frio 🧣";
-            default -> "Clima Indisponível";
+            case "weather-sunny" -> "Clima ensolarado ☀️";
+            case "weather-cloudy" -> "Clima nublado ☁️";
+            case "weather-fog" -> "Clima com neblina 🌫️";
+            case "weather-rain" -> "Clima chuvoso 🌧️";
+            case "weather-storm" -> "Clima de tempestade ⛈️";
+            case "weather-cold" -> "Clima frio ❄️";
+            default -> "Clima indisponível";
         };
     }
 
