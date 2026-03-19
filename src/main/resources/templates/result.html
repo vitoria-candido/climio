@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Resultado - Climio</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+
+<body th:class="${weatherClass}">
+
+<div class="page-shell">
+
+  <div class="video-background">
+    <video class="bg-video"
+           autoplay
+           muted
+           loop
+           playsinline>
+      <source th:src="@{'/videos/' + ${videoFileName}}" type="video/mp4">
+    </video>
+
+    <div class="video-overlay"></div>
+    <div class="video-tint"></div>
+  </div>
+
+  <main class="container">
+
+    <section class="hero hero-result">
+      <span class="hero-badge" th:text="${themeLabel}">Tema Climático</span>
+
+      <h1>Resultado da Recomendação</h1>
+
+      <p class="hero-subtitle">
+        Veja a previsão do dia escolhido e a melhor sugestão para sua atividade.
+      </p>
+    </section>
+
+    <section class="card main-card">
+
+      <div class="summary-grid">
+
+        <div class="summary-item">
+          <span class="summary-label">Cidade</span>
+          <strong class="summary-value" th:text="${city}">São Paulo</strong>
+        </div>
+
+        <div class="summary-item">
+          <span class="summary-label">Data</span>
+          <strong class="summary-value" th:text="${date}">19/03/2026</strong>
+        </div>
+
+        <div class="summary-item">
+          <span class="summary-label">Atividade</span>
+          <strong class="summary-value" th:text="${activityType}">Bike</strong>
+        </div>
+
+      </div>
+
+      <div th:if="${locationError != null}" class="message-box message-error"
+           th:text="${locationError}"></div>
+
+      <div th:if="${weatherError != null}" class="message-box message-error"
+           th:text="${weatherError}"></div>
+
+      <div th:if="${locationError == null and weatherError == null}" class="result-content">
+
+        <div class="info-panel">
+          <div class="info-block info-block-full">
+            <span class="info-label">Local Encontrado</span>
+            <strong class="info-value" th:text="${locationName}">
+              São Paulo, São Paulo, Brasil
+            </strong>
+          </div>
+        </div>
+
+        <div class="weather-panel">
+
+          <div class="weather-header">
+            <div class="weather-icon" th:text="${weatherEmoji}">☀️</div>
+
+            <div>
+              <h2>Previsão do Dia</h2>
+              <p class="weather-description"
+                 th:text="${weatherDescription}">
+                Céu Limpo
+              </p>
+            </div>
+          </div>
+
+          <div class="temperature-grid">
+
+            <div class="temperature-card">
+              <span class="temp-label">Temperatura Máxima</span>
+              <strong class="temp-value">
+                <span th:text="${temperatureMax}">28.0</span>°C
+              </strong>
+            </div>
+
+            <div class="temperature-card">
+              <span class="temp-label">Temperatura Mínima</span>
+              <strong class="temp-value">
+                <span th:text="${temperatureMin}">18.0</span>°C
+              </strong>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="message-box message-primary">
+          <span class="message-title">Recomendação</span>
+          <p th:text="${recommendation}">
+            Ótimo clima para sua atividade.
+          </p>
+        </div>
+
+        <div class="message-box message-warning">
+          <span class="message-title">Dica Extra</span>
+          <p th:text="${extraTip}">
+            Leve água e aproveite com conforto.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="actions">
+        <a th:href="@{/}" class="back-link">
+          ← Fazer Nova Busca
+        </a>
+      </div>
+
+    </section>
+
+  </main>
+
+</div>
+
+</body>
+</html>
