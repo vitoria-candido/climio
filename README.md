@@ -114,10 +114,10 @@ http://localhost:8080
 
 ## 📷 Preview
 
-### Tela inicial
+### Tela Inicial
 ![Tela inicial](./images/home.png)
 
-### Tela de resultado
+### Tela de Resultado
 ![Tela de resultado](./images/result.png)
 
 ---
